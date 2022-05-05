@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#9b9b9b</color>
     <color name="naranja">#FF4200</color>
+    <color name="blanco_roto">#FFf5f5f5</color>
+    <color name="gris">#FFB6B6B6</color>
+    <color name="azulOscuro">#FF0b2834</color>
 </resources>
