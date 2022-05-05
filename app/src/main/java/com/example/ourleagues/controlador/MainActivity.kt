@@ -15,9 +15,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var btnIrLogin: Button
     private lateinit var btnIrSingup: Button
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        getSupportActionBar()?.hide();
 
         btnIrLogin = findViewById(R.id.btnIrLogin)
         btnIrSingup = findViewById(R.id.btnIrSingup)

@@ -9,6 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ourleagues.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthEmailException
+import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -26,6 +29,7 @@ class LoginController  : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_layout)
+        getSupportActionBar()?.hide();
 
         auth = Firebase.auth
 
@@ -42,33 +46,50 @@ class LoginController  : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View?) {
 
         // Constantes para los elementos
-        val user = eTxtEmail.text.toString()
+        val email = eTxtEmail.text.toString()
         val pass = eTxtPass.text.toString()
 
         // Para iniciar el logon primero compruebo que no esten vacios los campos
-        if (user.isNotEmpty() && pass.isNotEmpty()){
+        if (email.isNotEmpty() && pass.isNotEmpty()){
 
-            if (login(user, pass)) {
-                startActivity(Intent(this, InicioController::class.java))
-            }else {
-                Toast.makeText(getApplicationContext(), "Datos invalidos", Toast.LENGTH_SHORT).show()
-            }
+            // Lanzo el metodo que continua con el proceso de login
+            login(email, pass)
 
         }
 
     }
 
-    private fun login(email: String, pass: String): Boolean {
 
-        var logeado : Boolean = false
+
+    private fun login(email: String, pass: String){
+
+        // Me gustaria devolver una varible boolean, pero dentro del task los cambios de varible no se guardan
+        // var logeado : Boolean = false;
 
         auth.signInWithEmailAndPassword(email, pass)
             .addOnCompleteListener(this){task ->
-                if (task.isSuccessful) logeado = true
-                finish()
+                if (task.isSuccessful) {
+                    startActivity(Intent(this, AppController::class.java))
+                    finish()
+                } else {
+                    try {
+                        throw task.exception!!
+                    } catch (e: FirebaseAuthInvalidCredentialsException) {
+                        Toast.makeText(this, "Invalid Password", Toast.LENGTH_LONG)
+                            .show()
+                    } catch (e: FirebaseAuthEmailException) {
+                        Toast.makeText(this, "Invalid Email", Toast.LENGTH_LONG)
+                            .show()
+                    } catch (e: FirebaseAuthException) {
+                        Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_LONG)
+                            .show()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
             }
 
-        return logeado
+        // return logeado
 
     }
 

@@ -9,6 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ourleagues.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthEmailException
+import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -23,10 +26,12 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
 
     // Variable para la autentificacion con firebase
     private lateinit var auth: FirebaseAuth
+    private lateinit var auth2: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.singup_layout)
+        getSupportActionBar()?.hide();
 
         // Instancio la variable de autentificacion
         auth = Firebase.auth
@@ -54,29 +59,43 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
         // Si no estan vacios los campos realiza singup
         if (nombre.isNotEmpty() && usuario.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()){
 
-            if (singup(nombre, usuario, email, password)){
-                // Voy a la pantalla de inicio
-                startActivity(Intent(this, InicioController::class.java))
-            }else {
-                Toast.makeText(getApplicationContext(), "Datos invalidos", Toast.LENGTH_SHORT).show()
-            }
+            // Lanzo el metodo que continua con el proceso de singin
+            singup(nombre, usuario, email, password)
 
         }
 
     }
 
     // Metodo para registrar el usuario
-    private fun singup (nombre: String, usuario: String, emailRegistro: String, password: String) : Boolean{
+    private fun singup (nombre: String, usuario: String, emailRegistro: String, password: String) {
 
-        var registrado : Boolean = false;
+        // Al igual que el login, no se guardía el cmabio del boolean
+        // var registrado : Boolean = false;
 
         auth.createUserWithEmailAndPassword(emailRegistro, password)
             .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) registrado = true
-                finish()
+                if (task.isSuccessful) {
+                    startActivity(Intent(this, AppController::class.java))
+                    finish()
+                }else {
+                    try {
+                        throw task.exception!!
+                    } catch (e: FirebaseAuthInvalidCredentialsException) {
+                        Toast.makeText(this, "Invalid Password", Toast.LENGTH_LONG)
+                            .show()
+                    } catch (e: FirebaseAuthEmailException) {
+                        Toast.makeText(this, "Invalid Email", Toast.LENGTH_LONG)
+                            .show()
+                    } catch (e: FirebaseAuthException) {
+                        Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_LONG)
+                            .show()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
             }
 
-        return registrado
+        // return registrado
 
     }
 

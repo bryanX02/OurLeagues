@@ -92,7 +92,7 @@
         android:id="@+id/btnSingup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/eTxtPass"
+        android:layout_below="@id/eTxtPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="15dp"
