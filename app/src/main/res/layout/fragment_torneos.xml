@@ -6,11 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".Torneos">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="TORNEOS"
-        android:textSize="40dp" />
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/txtTituloTorneos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/azulOscuro"
+            android:text="TORNEOS"
+            android:textSize="40dp" />
+
+
+
+
+    </RelativeLayout>
 </FrameLayout>

@@ -68,7 +68,7 @@
         android:layout_marginRight="15dp"
         android:background="@drawable/boton_registrarme"
         android:text="LOGIN"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="18sp" />
 
 

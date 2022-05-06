@@ -6,11 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".perfil">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="PERFIL"
-        android:textSize="40dp" />
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/txtTituloPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/azulOscuro"
+            android:text="Perfil del Usuario"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/txtNombreUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtTituloPerfil"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
+            android:textSize="20dp"
+            android:text="Nombre: "/>
+
+        <EditText
+            android:id="@+id/eTxtNombreUsuario"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtTituloPerfil"
+            android:layout_toRightOf="@id/txtNombreUsuario"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
+            />
+
+        <TextView
+            android:id="@+id/txtUsuarioUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtNombreUsuario"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
+            android:textSize="20dp"
+            android:text="Usuario:  "/>
+
+        <EditText
+            android:id="@+id/eTxtUsuarioUsuario"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtNombreUsuario"
+            android:layout_toRightOf="@id/txtUsuarioUsuario"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
+            />
+
+        <Button
+            android:id="@+id/btnGuardarUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtUsuarioUsuario"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:text="Guardar" />
+
+
+    </RelativeLayout>
 </FrameLayout>

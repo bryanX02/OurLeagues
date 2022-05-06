@@ -8,11 +8,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ourleagues.R
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthEmailException
-import com.google.firebase.auth.FirebaseAuthException
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class SingupController : AppCompatActivity(), View.OnClickListener {
@@ -27,6 +25,14 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
     // Variable para la autentificacion con firebase
     private lateinit var auth: FirebaseAuth
     private lateinit var auth2: FirebaseAuth
+
+    // Variables para vincular usuario de firebase con datos del usurio
+
+    // Usuario logeado
+    private var user: FirebaseUser? = null
+
+    // Conexción a la bd de firebase
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,24 +56,21 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View?) {
 
-        // Constantes de los campos
-        val nombre = eTxtNombre.text.toString()
-        val usuario = eTxtUsuario.text.toString()
         val email = eTxtEmailRegistro.text.toString()
         val password = eTxtPassword.text.toString()
 
         // Si no estan vacios los campos realiza singup
-        if (nombre.isNotEmpty() && usuario.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()){
+        if (email.isNotEmpty() && password.isNotEmpty()){
 
             // Lanzo el metodo que continua con el proceso de singin
-            singup(nombre, usuario, email, password)
+            singup(email, password)
 
         }
 
     }
 
     // Metodo para registrar el usuario
-    private fun singup (nombre: String, usuario: String, emailRegistro: String, password: String) {
+    private fun singup (emailRegistro: String, password: String) {
 
         // Al igual que el login, no se guardía el cmabio del boolean
         // var registrado : Boolean = false;
@@ -75,6 +78,10 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
         auth.createUserWithEmailAndPassword(emailRegistro, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+
+                    // Registro los datos
+                    registrarDatos()
+
                     startActivity(Intent(this, AppController::class.java))
                     finish()
                 }else {
@@ -96,6 +103,19 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
             }
 
         // return registrado
+
+    }
+
+    private fun registrarDatos () {
+
+        //Obtengo el usuario logeado
+        user = FirebaseAuth.getInstance().currentUser
+
+        db.collection("usuarios").document(eTxtEmailRegistro.text.toString()).set(
+            hashMapOf("Nombre" to eTxtNombre.text.toString(),
+            "Usuario" to eTxtUsuario.text.toString())
+        )
+
 
     }
 

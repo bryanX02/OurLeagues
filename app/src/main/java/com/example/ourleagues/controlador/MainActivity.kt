@@ -1,13 +1,14 @@
 package com.example.ourleagues.controlador
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ourleagues.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -15,6 +16,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var btnIrLogin: Button
     private lateinit var btnIrSingup: Button
 
+    private lateinit var firebaseAuth: FirebaseAuth
+    private var user: FirebaseUser? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +29,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         btnIrLogin.setOnClickListener(this)
         btnIrSingup.setOnClickListener(this)
+
+        firebaseAuth = FirebaseAuth.getInstance()
+        user = firebaseAuth.currentUser
+
+        // Si hay una sesion iniciada pasamos a la pantalla de la app
+        if (user!=null){
+            startActivity(Intent(this, AppController::class.java))
+        }
 
     }
 
