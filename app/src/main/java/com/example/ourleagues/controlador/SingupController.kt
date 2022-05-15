@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ourleagues.R
+import com.example.ourleagues.modelo.Usuario
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -111,10 +112,20 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
         //Obtengo el usuario logeado
         user = FirebaseAuth.getInstance().currentUser
 
+        // Obtengo los datos opcionales y creo un usuario con ellos
+        var usuario = Usuario();
+        usuario.email = user?.email.toString()
+        usuario.nombre = eTxtNombre.text.toString()
+        usuario.usuario = eTxtUsuario.text.toString()
+
         db.collection("usuarios").document(eTxtEmailRegistro.text.toString()).set(
-            hashMapOf("Nombre" to eTxtNombre.text.toString(),
-            "Usuario" to eTxtUsuario.text.toString())
+            hashMapOf(
+                "Email" to usuario.email,
+                "Nombre" to usuario.nombre,
+                "Usuario" to usuario.usuario)
         )
+
+        // HAY QUE CREAR UN BUEN FRAGMENT PAR ALOS OPCIONALES E INTEFACES PARA EL DAO
 
 
     }

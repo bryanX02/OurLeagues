@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/inicio"
-        android:name="com.example.ourleagues.Inicio"
+        android:name="com.example.ourleagues.fragments.Inicio"
         android:label="fragment_inicio"
         tools:layout="@layout/fragment_inicio" />
     <fragment
         android:id="@+id/torneos"
-        android:name="com.example.ourleagues.Torneos"
+        android:name="com.example.ourleagues.fragments.Torneos"
         android:label="fragment_torneos"
         tools:layout="@layout/fragment_torneos" />
     <fragment
         android:id="@+id/amigos"
-        android:name="com.example.ourleagues.amigos"
+        android:name="com.example.ourleagues.fragments.amigos"
         android:label="fragment_amigos"
         tools:layout="@layout/fragment_amigos" />
     <fragment
         android:id="@+id/perfil"
-        android:name="com.example.ourleagues.perfil"
+        android:name="com.example.ourleagues.fragments.perfil"
         android:label="fragment_perfil"
         tools:layout="@layout/fragment_perfil" />
     <fragment
         android:id="@+id/ajustes"
-        android:name="com.example.ourleagues.ajustes"
+        android:name="com.example.ourleagues.fragments.ajustes"
         android:label="fragment_ajustes"
         tools:layout="@layout/fragment_ajustes" />
 </navigation>
