@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ourleagues.R
+import com.example.ourleagues.modelo.AuxFirebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthEmailException
 import com.google.firebase.auth.FirebaseAuthException
@@ -22,16 +23,14 @@ class LoginController  : AppCompatActivity(), View.OnClickListener {
     private lateinit var eTxtPass: EditText
     private lateinit var btnLogin: Button
 
-    // Variable par la auntentificación
-    private lateinit var auth: FirebaseAuth
+    // Variable para emplear firebase
+    private val auxFirebase = AuxFirebase()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_layout)
         getSupportActionBar()?.hide();
-
-        auth = Firebase.auth
 
         // Instancio las variables
         eTxtEmail = findViewById(R.id.eTxtEmail)
@@ -66,7 +65,7 @@ class LoginController  : AppCompatActivity(), View.OnClickListener {
         // Me gustaria devolver una varible boolean, pero dentro del task los cambios de varible no se guardan
         // var logeado : Boolean = false;
 
-        auth.signInWithEmailAndPassword(email, pass)
+        auxFirebase.auth.signInWithEmailAndPassword(email, pass)
             .addOnCompleteListener(this){task ->
                 if (task.isSuccessful) {
                     startActivity(Intent(this, AppController::class.java))

@@ -1,5 +1,6 @@
 package com.example.ourleagues.controlador
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ourleagues.R
+import com.example.ourleagues.modelo.AuxFirebase
 import com.example.ourleagues.modelo.Usuario
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
@@ -23,25 +25,17 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
     private lateinit var eTxtPassword: EditText
     private lateinit var btnSingup: Button
 
-    // Variable para la autentificacion con firebase
-    private lateinit var auth: FirebaseAuth
-    private lateinit var auth2: FirebaseAuth
-
-    // Variables para vincular usuario de firebase con datos del usurio
+    // Variable para emplear firebase
+    private val auxFirebase = AuxFirebase()
 
     // Usuario logeado
     private var user: FirebaseUser? = null
 
-    // Conexción a la bd de firebase
-    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.singup_layout)
         getSupportActionBar()?.hide();
-
-        // Instancio la variable de autentificacion
-        auth = Firebase.auth
 
         // Instancio las variables de los elementos de la interfaz
         eTxtNombre = findViewById(R.id.eTxtNombre)
@@ -63,7 +57,6 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
         // Si no estan vacios los campos realiza singup
         if (email.isNotEmpty() && password.isNotEmpty()){
 
-            // Lanzo el metodo que continua con el proceso de singin
             singup(email, password)
 
         }
@@ -73,19 +66,23 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
     // Metodo para registrar el usuario
     private fun singup (emailRegistro: String, password: String) {
 
-        // Al igual que el login, no se guardía el cmabio del boolean
-        // var registrado : Boolean = false;
-
-        auth.createUserWithEmailAndPassword(emailRegistro, password)
+        auxFirebase.auth.createUserWithEmailAndPassword(emailRegistro, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
 
-                    // Registro los datos
-                    registrarDatos()
+                    var usuario = Usuario()
+                    usuario.email = emailRegistro
+                    usuario.password = password
+                    usuario.nombre = eTxtNombre.text.toString()
+                    usuario.usuario = eTxtUsuario.text.toString()
 
-                    startActivity(Intent(this, AppController::class.java))
-                    finish()
-                }else {
+                    if (usuario.crear()){
+                        startActivity(Intent(this, AppController::class.java))
+                    }else {
+                        Toast.makeText(this, "No se completo el registro", Toast.LENGTH_SHORT).show()
+                    }
+
+                } else {
                     try {
                         throw task.exception!!
                     } catch (e: FirebaseAuthInvalidCredentialsException) {
@@ -102,15 +99,11 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
                     }
                 }
             }
-
-        // return registrado
-
     }
-
     private fun registrarDatos () {
 
         //Obtengo el usuario logeado
-        user = FirebaseAuth.getInstance().currentUser
+        user = auxFirebase.auth.currentUser
 
         // Obtengo los datos opcionales y creo un usuario con ellos
         var usuario = Usuario();
@@ -118,7 +111,7 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
         usuario.nombre = eTxtNombre.text.toString()
         usuario.usuario = eTxtUsuario.text.toString()
 
-        db.collection("usuarios").document(eTxtEmailRegistro.text.toString()).set(
+        auxFirebase.db.collection("usuarios").document(eTxtEmailRegistro.text.toString()).set(
             hashMapOf(
                 "Email" to usuario.email,
                 "Nombre" to usuario.nombre,
