@@ -1,36 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Inicio">
+    tools:context=".fragments.InicioFragment">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/txtBienvenido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="50dp"
+        android:text="BIENVENIDO"
+        android:textColor="@color/black"
+        android:textSize="40dp" />
 
-        <TextView
-            android:id="@+id/txtBienvenido"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="50dp"
-            android:text="BIENVENIDO"
-            android:textColor="@color/black"
-            android:textSize="40dp" />
+    <TextView
+        android:id="@+id/txtUser"
+        android:layout_width="wrap_content"
+        android:layout_height="53dp"
+        android:layout_below="@id/txtBienvenido"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="50dp"
+        android:textColor="@color/black"
+        android:textSize="40dp" />
 
-        <TextView
-            android:id="@+id/txtUser"
-            android:layout_width="wrap_content"
-            android:layout_height="53dp"
-            android:layout_below="@id/txtBienvenido"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="50dp"
-            android:text="dsgsgsdg"
-            android:textColor="@color/black"
-            android:textSize="40dp" />
 
-    </RelativeLayout>
-
-</FrameLayout>
+</RelativeLayout>
