@@ -1,17 +1,10 @@
 package com.example.ourleagues.modelo
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
-import com.example.ourleagues.controlador.AppController
-import com.google.firebase.auth.FirebaseAuthEmailException
-import com.google.firebase.auth.FirebaseAuthException
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import java.util.*
+import android.util.Log
+import kotlinx.coroutines.tasks.await
+import java.util.Date
 
-class Usuario () : DAO<Usuario>{
+class Usuario : DAO<Usuario>{
 
     var email: String = "defaultValue"
     var password: String = "defaultValue"
@@ -25,9 +18,21 @@ class Usuario () : DAO<Usuario>{
     val auxFirebase = AuxFirebase()
 
 
-    override fun obtener(identificador: String): Boolean {
-        TODO("Not yet implemented")
+    override suspend fun obtener(identificador: String) {
+
+        auxFirebase.db.collection("usuarios").document(identificador).get().addOnSuccessListener {
+
+            nombre = it.get("Nombre").toString()
+            usuario = it.get("Usuario").toString()
+
+            Log.d(":::Log", nombre)
+        }.await()
+
+
+        Log.d(":::Log", nombre)
+
     }
+
 
     override fun obtenerListado(): List<Usuario> {
         TODO("Not yet implemented")

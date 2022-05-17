@@ -4,7 +4,7 @@ import io.grpc.Context
 
 interface DAO <T> {
 
-    fun obtener (identificador : String) : Boolean
+    suspend fun obtener (identificador : String)
     fun crear () : Boolean
     fun modificar (reemplazo : T) : Boolean
     fun eliminar () : Boolean

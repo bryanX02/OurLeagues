@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.lifecycle.lifecycleScope
 import com.example.ourleagues.controlador.MainActivity
 import com.example.ourleagues.modelo.Usuario
 import com.google.firebase.auth.FirebaseAuth
@@ -18,6 +19,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.ktx.Firebase
 import com.example.ourleagues.R
+import com.example.ourleagues.modelo.AuxFirebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,11 +44,11 @@ class perfil : Fragment(), View.OnClickListener {
     private lateinit var eTxtUsuarioUsuario: EditText
     private lateinit var btnGuardarUsuario: Button
 
-    // Base de datos de firebase
-    private val db = FirebaseFirestore.getInstance()
+    // Variable Usuario con el se operara
+    var usuario = Usuario()
 
-    // Usuario logeado
-    private var user: FirebaseUser? = null
+    // Variable para obtner instancias actuales
+    val auxFirebase = AuxFirebase()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,9 +63,6 @@ class perfil : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
 
-        // Obtengo el user logeado
-        user = FirebaseAuth.getInstance().currentUser
-
         var rootView = inflater.inflate(R.layout.fragment_perfil, container, false)
 
         // Obtengo las variable cuando entra a la pantalla
@@ -68,9 +70,18 @@ class perfil : Fragment(), View.OnClickListener {
         eTxtUsuarioUsuario = rootView.findViewById(R.id.eTxtUsuarioUsuario)
         btnGuardarUsuario = rootView.findViewById(R.id.btnGuardarUsuario)
 
-        if (user != null) {
+        if (auxFirebase.auth.currentUser != null) {
 
-            obtenerUsuario(user?.email ?: "Usuario sin email")
+
+            lifecycleScope.launch() {
+
+                usuario.obtener(auxFirebase.auth.currentUser?.email ?: "Usuario sin email")
+
+                eTxtNombreUsuario.setText(usuario.nombre)
+                eTxtUsuarioUsuario.setText(usuario.usuario)
+
+            }
+
             btnGuardarUsuario.setOnClickListener(this)
 
         }
@@ -99,18 +110,9 @@ class perfil : Fragment(), View.OnClickListener {
             }
     }
 
-    private fun obtenerUsuario (email : String) {
-
-        db.collection("usuarios").document(email).get().addOnSuccessListener {
-            eTxtNombreUsuario.setText(it.get("Nombre") as String?)
-            eTxtUsuarioUsuario.setText(it.get("Usuario").toString())
-        }
-
-    }
-
     override fun onClick(p0: View?) {
 
-        db.collection("usuarios").document(user?.email ?: "Usuario sin email").set(
+        auxFirebase.db.collection("usuarios").document(auxFirebase.auth.currentUser?.email ?: "Usuario sin email").set(
             hashMapOf("Nombre" to eTxtNombreUsuario.text.toString(),
             "Usuario" to eTxtUsuarioUsuario.text.toString())
         )

@@ -88,8 +88,6 @@ class LoginController  : AppCompatActivity(), View.OnClickListener {
                 }
             }
 
-        // return logeado
-
     }
 
 }

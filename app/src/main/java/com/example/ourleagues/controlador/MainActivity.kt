@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getSupportActionBar()?.hide();
 
         btnIrLogin = findViewById(R.id.btnIrLogin)
         btnIrSingup = findViewById(R.id.btnIrSingup)
