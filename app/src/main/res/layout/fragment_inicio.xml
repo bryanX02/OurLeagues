@@ -10,21 +10,141 @@
         android:id="@+id/txtBienvenido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
         android:text="BIENVENIDO"
         android:textColor="@color/black"
-        android:textSize="40dp" />
+        android:textSize="22dp" />
 
     <TextView
         android:id="@+id/txtUser"
-        android:layout_width="wrap_content"
-        android:layout_height="53dp"
-        android:layout_below="@id/txtBienvenido"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/txtBienvenido"
         android:layout_centerHorizontal="true"
-        android:layout_margin="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
         android:textColor="@color/black"
-        android:textSize="40dp" />
+        android:textSize="22dp" />
 
+    <TextView
+        android:id="@+id/txtProximosEventos"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtUser"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="@color/black"
+        android:textSize="22dp"
+        android:text="Proximos eventos"/>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollViewProximosEventos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtProximosEventos"
+        android:layout_marginTop="50dp">
+
+        <LinearLayout
+            android:id="@+id/lineaLayoutProximosEventos"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/torneos"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/torneos"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/torneos"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/torneos"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/torneos"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/torneos"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/torneos"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/torneos"/>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/txtEventosEnCurso"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/horizontalScrollViewProximosEventos"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="@color/black"
+        android:textSize="22dp"
+        android:text="Eventos en curso"/>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollViewEventosEnCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtEventosEnCurso"
+        android:layout_marginTop="50dp">
+
+        <LinearLayout
+            android:id="@+id/lineaLayoutEventosEnCurso"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/torneos"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/torneos"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/torneos"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/torneos"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/torneos"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/torneos"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/torneos"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/torneos"/>
+
+        </LinearLayout>
+    </HorizontalScrollView>
 
 </RelativeLayout>
