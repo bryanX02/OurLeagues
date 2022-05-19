@@ -24,6 +24,7 @@
         <activity android:name=".controlador.LoginController" />
         <activity android:name=".controlador.SingupController" />
         <activity android:name=".controlador.AppController" />
+        <activity android:name=".controlador.CrearTorneoController"/>
     </application>
 
 </manifest>

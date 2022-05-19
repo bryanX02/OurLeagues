@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="40dp"
         android:textSize="40dp"
-        android:textColor="@color/white"
+        android:textColor="@color/azulOscuro"
         android:text="Registrese" />
 
     <ImageView
@@ -99,7 +99,7 @@
         android:layout_marginRight="15dp"
         android:background="@drawable/boton_registrarme"
         android:text="REGISTRARME"
-        android:textColor="@color/black"
+        android:textColor="@color/blanco_roto"
         android:textSize="18sp" />
 
 </RelativeLayout>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.DatosBaloncestoFragment">
+
+    <TextView
+        android:id="@+id/txtTituloConfiguracionBaloncesto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="24dp"
+        android:textSize="14dp"
+        android:text="Configuración del Torneo" />
+
+    <TextView
+        android:id="@+id/txtNombreTorneoBaloncesto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="24dp"
+        android:layout_below="@+id/txtTituloConfiguracionBaloncesto"
+        android:textSize="14dp"
+        android:text="Nombre del torneo" />
+
+    <EditText
+        android:id="@+id/eTxtNombreTorneoBalonesto"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:inputType="text"
+        android:layout_below="@id/txtNombreTorneoBaloncesto"
+        android:hint="Mi torneo" />
+
+    <TextView
+        android:id="@+id/txtNumeroEquipos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="44dp"
+        android:layout_below="@+id/txtTituloConfiguracionBaloncesto"
+        android:layout_toRightOf="@+id/txtNombreTorneoBaloncesto"
+        android:textSize="14dp"
+        android:text="Numero de Equipos" />
+
+    <EditText
+        android:id="@+id/eTxtNumeroEquiposBaloncesto"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="60dp"
+        android:inputType="number"
+        android:layout_below="@+id/txtNumeroEquipos"
+        android:layout_toRightOf="@+id/eTxtNombreTorneoBalonesto"
+        android:hint="0" />
+
+    <TextView
+        android:id="@+id/txtFechaInicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="24dp"
+        android:layout_below="@+id/eTxtNombreTorneoBalonesto"
+        android:textSize="14dp"
+        android:text="Fecha de Inicio" />
+
+    <EditText
+        android:id="@+id/eTxtFechaInicio"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtFechaInicio"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:inputType="date"
+        android:hint="20/05/2022" />
+
+    <TextView
+        android:id="@+id/txtFechaFin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="44dp"
+        android:layout_below="@+id/eTxtNumeroEquiposBaloncesto"
+        android:layout_toRightOf="@+id/txtNombreTorneoBaloncesto"
+        android:textSize="14dp"
+        android:text="Fecha de Fin" />
+
+    <EditText
+        android:id="@+id/eTxtFechaFin"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="55dp"
+        android:inputType="date"
+        android:layout_below="@+id/txtFechaFin"
+        android:layout_toRightOf="@+id/eTxtFechaInicio"
+        android:hint="20/05/2022" />
+
+    <TextView
+        android:id="@+id/txtUbicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="24dp"
+        android:layout_below="@+id/eTxtFechaFin"
+        android:textSize="14dp"
+        android:text="Fecha de Fin" />
+
+    <EditText
+        android:id="@+id/eTxtUbicacionTorneoBaloncesto"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:inputType="text"
+        android:layout_below="@+id/txtUbicacion"
+        android:hint="Online" />
+
+    <Button
+        android:id="@+id/btnEliminatoriasBaloncesto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/eTxtFechaFin"
+        android:layout_toRightOf="@+id/eTxtUbicacionTorneoBaloncesto"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="15dp"
+        android:text="Eliminatorias"
+        android:textColor="@color/blanco_roto"
+        android:textSize="12sp" />
+
+
+</RelativeLayout>

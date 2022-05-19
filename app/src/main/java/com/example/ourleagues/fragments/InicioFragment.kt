@@ -9,12 +9,6 @@ import android.widget.TextView
 import com.example.ourleagues.R
 import com.example.ourleagues.modelo.AuxFirebase
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [InicioFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class InicioFragment : Fragment() {
 
     // Variables para los elementos de la interfaz

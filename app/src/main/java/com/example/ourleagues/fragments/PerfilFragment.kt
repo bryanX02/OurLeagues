@@ -45,7 +45,6 @@ class PerfilFragment : Fragment(), View.OnClickListener {
 
         if (auxFirebase.auth.currentUser != null) {
 
-
             lifecycleScope.launch() {
 
                 usuario.obtener(auxFirebase.auth.currentUser?.email ?: "Usuario sin email")

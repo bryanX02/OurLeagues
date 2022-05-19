@@ -22,12 +22,6 @@ class AppController : AppCompatActivity(){
     private val perfilFragment = PerfilFragment()
     private val ajustesFragment = AjustesFragment()
 
-    // Usuario logeado
-    private var user: FirebaseUser? = null
-
-    // Conexión a la bd de firebase
-    private val db = FirebaseFirestore.getInstance()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.app_layout)

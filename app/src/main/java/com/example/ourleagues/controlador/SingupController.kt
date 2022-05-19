@@ -28,14 +28,9 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
     // Variable para emplear firebase
     private val auxFirebase = AuxFirebase()
 
-    // Usuario logeado
-    private var user: FirebaseUser? = null
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.singup_layout)
-        getSupportActionBar()?.hide();
 
         // Instancio las variables de los elementos de la interfaz
         eTxtNombre = findViewById(R.id.eTxtNombre)
@@ -71,15 +66,16 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
                 if (task.isSuccessful) {
 
                     var usuario = Usuario()
+                    usuario.UID = auxFirebase.auth.currentUser?.uid.toString()
                     usuario.email = emailRegistro
-                    usuario.password = password
                     usuario.nombre = eTxtNombre.text.toString()
                     usuario.usuario = eTxtUsuario.text.toString()
 
-                    if (usuario.crear()){
+                    if (usuario.crear()) {
                         startActivity(Intent(this, AppController::class.java))
-                    }else {
-                        Toast.makeText(this, "No se completo el registro", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "No se completo el registro", Toast.LENGTH_SHORT)
+                            .show()
                     }
 
                 } else {
@@ -99,28 +95,6 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
                     }
                 }
             }
-    }
-    private fun registrarDatos () {
-
-        //Obtengo el usuario logeado
-        user = auxFirebase.auth.currentUser
-
-        // Obtengo los datos opcionales y creo un usuario con ellos
-        var usuario = Usuario();
-        usuario.email = user?.email.toString()
-        usuario.nombre = eTxtNombre.text.toString()
-        usuario.usuario = eTxtUsuario.text.toString()
-
-        auxFirebase.db.collection("usuarios").document(eTxtEmailRegistro.text.toString()).set(
-            hashMapOf(
-                "Email" to usuario.email,
-                "Nombre" to usuario.nombre,
-                "Usuario" to usuario.usuario)
-        )
-
-        // HAY QUE CREAR UN BUEN FRAGMENT PAR ALOS OPCIONALES E INTEFACES PARA EL DAO
-
-
     }
 
 }

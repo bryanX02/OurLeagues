@@ -8,6 +8,6 @@ interface DAO <T> {
     fun crear () : Boolean
     fun modificar (reemplazo : T) : Boolean
     fun eliminar () : Boolean
-    fun obtenerListado (): List<T>
+    suspend fun obtenerListado (): ArrayList<T>
 
 }
