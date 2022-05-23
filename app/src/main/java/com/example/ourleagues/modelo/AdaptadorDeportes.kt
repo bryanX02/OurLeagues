@@ -1,8 +1,6 @@
 package com.example.ourleagues.modelo
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +8,12 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.setFragmentResult
 import com.example.ourleagues.R
-import com.example.ourleagues.controlador.TorneoController
-import com.example.ourleagues.fragments.DatosBaloncestoFragment
+import com.example.ourleagues.fragments.DatosTorneoFragment
 import com.squareup.picasso.Picasso
 
 class AdaptadorDeportes (private val context: Context,
@@ -58,13 +57,13 @@ class AdaptadorDeportes (private val context: Context,
         // Activo un listener a cada fila
         rowView.setOnClickListener {
             // Cuando pulsen sobre un deporte cambiare de fragment al de la creacion del torneo
-
+            activity.supportFragmentManager.findFragmentById(R.id.fragmentCreacionTorneos)
+                ?.setFragmentResult("Deporte", bundleOf("Nombre" to deporte.nombre))
             when (deporte.nombre) {
 
-                "Baloncesto" -> replaceFragment(DatosBaloncestoFragment())
+                "Baloncesto" -> replaceFragment(DatosTorneoFragment())
 
             }         
-
 
             /*var intent = Intent(context, TorneoController::class.java)
             intent.putExtra("Deporte", deporte.nombre)*/

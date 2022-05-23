@@ -1,7 +1,5 @@
 package com.example.ourleagues.fragments
 
-import android.app.DatePickerDialog.OnDateSetListener
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -9,23 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.DatePicker
 import android.widget.EditText
-import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import com.example.ourleagues.R
 import com.example.ourleagues.modelo.AuxFirebase
+import com.example.ourleagues.modelo.Deporte
 import com.example.ourleagues.modelo.Torneo
-import kotlinx.android.synthetic.main.singup_layout.*
 import java.time.LocalDateTime
 import java.util.*
 
 
-class DatosBaloncestoFragment : Fragment(), View.OnClickListener {
-
-    // Fragment al que pasaré
-    private var participantesBaloncestoFragment = ParticipantesBaloncestoFragment()
+class DatosTorneoFragment : Fragment(), View.OnClickListener {
 
     // Variables para los elementos de la interfaz
     private lateinit var eTxtNombreTorneo: EditText
@@ -38,20 +34,31 @@ class DatosBaloncestoFragment : Fragment(), View.OnClickListener {
     // Variable para emplear Firebase
     private val auxFirebase = AuxFirebase()
 
+    // Otras variables
+    private var deporte = Deporte()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        var rootView = inflater.inflate(R.layout.fragment_datos_baloncesto, container, false)
+        // Obtengo el torneo que se selecciono
+        setFragmentResultListener("Deporte") { requestKey, bundle ->
+            val result1 = bundle.getString("Nombre")
+            if (result1 != null) {
+                Log.d(":::Log", result1)
+            }
+        }
+
+        var rootView = inflater.inflate(R.layout.fragment_datos_torneo, container, false)
 
         // Instancio las variables de los elementos de la interfaz
-        eTxtNombreTorneo = rootView.findViewById(R.id.eTxtNombreTorneoBalonesto)
-        eTxtNumeroEquipos = rootView.findViewById(R.id.eTxtNumeroEquiposBaloncesto)
-        eTxtUbicacion = rootView.findViewById(R.id.eTxtUbicacionTorneoBaloncesto)
+        eTxtNombreTorneo = rootView.findViewById(R.id.eTxtNombreTorneo)
+        eTxtNumeroEquipos = rootView.findViewById(R.id.eTxtNumeroEquipos)
+        eTxtUbicacion = rootView.findViewById(R.id.eTxtUbicacionTorneo)
         eTxtFechaInicio = rootView.findViewById(R.id.eTxtFechaInicio)
         eTxtFechaFin = rootView.findViewById(R.id.eTxtFechaFin)
-        btnEliminatorias = rootView.findViewById(R.id.btnEliminatoriasBaloncesto)
+        btnEliminatorias = rootView.findViewById(R.id.btnEliminatorias)
 
         btnEliminatorias.setOnClickListener(this)
 
@@ -62,7 +69,7 @@ class DatosBaloncestoFragment : Fragment(), View.OnClickListener {
     override fun onClick(p0: View?) {
 
         if (p0 != null) {
-            if (p0.id == R.id.btnEliminatoriasBaloncesto){
+            if (p0.id == R.id.btnEliminatorias){
 
                 // Creo el torneo (sin participantes)
                 var torneo = Torneo()
@@ -71,6 +78,7 @@ class DatosBaloncestoFragment : Fragment(), View.OnClickListener {
                 torneo.ubicacion = eTxtUbicacion.text.toString()
                 torneo.fechaInicio = LocalDateTime.now()
                 torneo.fechaFin = LocalDateTime.now()
+
                 if (torneo.crear()){
                     activity?.finish()
                 }

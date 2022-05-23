@@ -23,11 +23,6 @@ import com.example.ourleagues.modelo.Torneo
 import com.example.ourleagues.modelo.Usuario
 import kotlinx.coroutines.launch
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TorneosFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TorneosFragment : Fragment(), View.OnClickListener {
 
     // Variables de la interfaz
@@ -61,7 +56,6 @@ class TorneosFragment : Fragment(), View.OnClickListener {
             listaTorneos.forEach{
                 listaNombres.add(it.nombre.toString())
             }
-            Log.d(":::LOG", listaTorneos.toString())
             var adapter = ArrayAdapter(rootView.context, android.R.layout.simple_list_item_1, listaNombres)
             listViewListaTorneos.adapter = adapter
 
