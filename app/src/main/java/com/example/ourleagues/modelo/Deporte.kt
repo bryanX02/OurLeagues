@@ -41,7 +41,6 @@ class Deporte : DAO<Deporte>{
 
         var listaDeportes : ArrayList<Deporte> = arrayListOf()
 
-
         auxFirebase.db.collection("deportes").get().addOnSuccessListener {
 
             for (document in it){
@@ -49,7 +48,6 @@ class Deporte : DAO<Deporte>{
                 deporte.nombre = document.get("Nombre").toString()
                 deporte.descripcion = document.get("Descripcion").toString()
                 deporte.urlFoto = document.get("UrlFoto").toString()
-                Log.d(":::LOG", deporte.toString())
                 listaDeportes.add(deporte)
 
             }

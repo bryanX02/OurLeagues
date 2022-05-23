@@ -52,13 +52,17 @@ class Torneo : DAO<Torneo> {
 
         var creado = false
 
+        // Creo el torneo
         idTorneo?.let {
             auxFirebase.db.collection("torneos").document(it).set(
                 hashMapOf(
                     "Nombre" to nombre,
                     "Ubicacion" to ubicacion,
                     "FechaInicio" to fechaInicio,
-                    "FechaFin" to fechaFin)
+                    "FechaFin" to fechaFin,
+                    "Estado" to 0,
+                    "Creador" to (auxFirebase.auth.currentUser?.uid ?: "UID no encontrada")
+                )
             )
         }
 
@@ -77,8 +81,46 @@ class Torneo : DAO<Torneo> {
         TODO("Not yet implemented")
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun obtenerListado(): ArrayList<Torneo> {
-        TODO("Not yet implemented")
+        
+        var listaTorneos : ArrayList<Torneo> = arrayListOf()
+
+        auxFirebase.db.collection("torneos").get().addOnSuccessListener {
+
+            for (document in it) {
+
+                // Solo añado los torneos creados por el usuario
+                if (document.get("Creador") == auxFirebase.auth.currentUser?.uid) {
+                    var torneo = Torneo()
+
+                    torneo.idTorneo = document.id
+                    torneo.nombre = document.get("Nombre").toString()
+                    torneo.descripcion = document.get("Usuario").toString()
+                    torneo.ubicacion = document.get("Ubicacion").toString()
+
+                    // urlFoto = document.get("UrlFoto").toString()
+
+                    /*GlobalScope.launch {
+                        deporte?.obtener(document.get("Deporte").toString())
+                        creador?.obtener(document.get("Creador").toString())
+                        participantes = creador?.obtenerListaParticipantes(null)
+                    }*/
+                    /*
+                    fechaInicio = LocalDateTime.parse(document.get("FechaInicio").toString())
+                    fechaInicio = LocalDateTime.parse(document.get("FechaFin").toString())*/
+                    fechaInicio = LocalDateTime.now()
+                    fechaFin = LocalDateTime.now()
+
+                    listaTorneos.add(torneo)
+                }
+
+            }
+
+        }.await()
+
+        return listaTorneos
+        
     }
 
 }

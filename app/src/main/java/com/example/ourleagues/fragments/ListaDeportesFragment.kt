@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import com.example.ourleagues.R
+import com.example.ourleagues.modelo.AdaptadorDeportes
 import com.example.ourleagues.modelo.Deporte
 import kotlinx.coroutines.launch
 
@@ -33,41 +34,17 @@ class ListaDeportesFragment : Fragment() {
         var deporte = Deporte()
         lifecycleScope.launch() {
             listaDeportes = deporte.obtenerListado()
-            var listaNombres = arrayListOf<String>()
 
-            listaDeportes.forEach{
-                listaNombres.add(it.nombre.toString())
-            }
-            var adapter = ArrayAdapter(rootView.context, android.R.layout.simple_list_item_1, listaNombres)
+            var adapter = context?.let { activity?.let { it1 ->
+                AdaptadorDeportes(it,
+                    it1, listaDeportes)
+            } }
             listViewDeportes.adapter = adapter
 
-            // Listener a los items de la lista
-            listViewDeportes.setOnItemClickListener { adapterView, view, i, l ->
-                when (i) {
-                    0 -> {
-                        replaceFragment(datosBaloncestoFragment)
-                    }
-                }
-            }
-
         }
 
-
-        // Inflate the layout for this fragment
         return rootView
 
-    }
-
-    fun replaceFragment (fragment: Fragment){
-        if (fragment != null) {
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            if (transaction != null) {
-                transaction.replace(R.id.fragmentCreacionTorneos, fragment)
-                transaction.commit()
-            }else {
-                Log.d(":::Log", "Transaccion invalida en el replaceFragment de ListaDeportesFragment")
-            }
-        }
     }
 
 }

@@ -24,4 +24,25 @@
         android:layout_marginTop="40dp"
         android:text="Crear Torneo" />
 
+    <TextView
+        android:id="@+id/txtListaTorneos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="24dp"
+        android:layout_below="@id/btnCrearTorneo"
+        android:textColor="@color/azulOscuro"
+        android:text="Tu lista"
+        android:textSize="24dp" />
+
+    <ListView
+        android:id="@+id/listViewListaTorneos"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_below="@id/txtListaTorneos"/>
+
+
 </RelativeLayout>
