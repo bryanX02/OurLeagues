@@ -56,9 +56,11 @@ class AdaptadorDeportes (private val context: Context,
 
         // Activo un listener a cada fila
         rowView.setOnClickListener {
+
             // Cuando pulsen sobre un deporte cambiare de fragment al de la creacion del torneo
             activity.supportFragmentManager.findFragmentById(R.id.fragmentCreacionTorneos)
                 ?.setFragmentResult("Deporte", bundleOf("Nombre" to deporte.nombre))
+
             when (deporte.nombre) {
 
                 "Baloncesto" -> replaceFragment(DatosTorneoFragment())

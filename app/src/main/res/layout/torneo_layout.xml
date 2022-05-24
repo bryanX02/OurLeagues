@@ -3,4 +3,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/txtTituloNombreTorneo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="26dp"
+        android:textColor="@color/azulOscuro"
+        android:text="Torneo"/>
+
+    <TextView
+        android:id="@+id/txtDescripcionTorneo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTituloNombreTorneo"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:text="Torneo de Baloncesto"/>
+
+    <ImageView
+        android:id="@+id/imgTorneo"
+        android:layout_width="140dp"
+        android:layout_height="95dp"
+        android:layout_below="@id/txtTituloNombreTorneo"
+        android:layout_toRightOf="@id/txtDescripcionTorneo"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="25dp"
+        android:src="@drawable/baloncesto"
+        android:background="@drawable/round_outline"/>
+
+    <TextView
+        android:id="@+id/txtUbicacionTorneo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtDescripcionTorneo"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:text="Madrid"/>
+
+    <TextView
+        android:id="@+id/txtEstadoTorneo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtUbicacionTorneo"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:text="Activo"/>
+
+    <FrameLayout
+        android:id="@+id/fragmentTorneo"
+        android:layout_width="match_parent"
+        android:layout_height="560dp"
+        android:layout_below="@id/txtEstadoTorneo"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+
 </RelativeLayout>

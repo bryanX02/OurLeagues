@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.setFragmentResultListener
 import com.example.ourleagues.R
 
-class ParticipantesBaloncestoFragment : Fragment() {
+class ParticipantesTorneoFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

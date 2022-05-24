@@ -8,11 +8,15 @@ import com.google.type.DateTime
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.sql.Timestamp
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.util.*
+import kotlin.collections.ArrayList
 
 class Torneo : DAO<Torneo> {
 
+    // Atributos
     var idTorneo: String? = null
     var nombre: String? = null
     var descripcion: String? = null
@@ -20,31 +24,31 @@ class Torneo : DAO<Torneo> {
     var ubicacion: String? = null
     var deporte: Deporte? = Deporte()
     var creador: Usuario? = Usuario()
-    var participantes: ArrayList<Usuario>? = null
-    var fechaInicio: LocalDateTime? = null
-    var fechaFin: LocalDateTime? = null
+    var numeroParticipantes: Int = 0
+    var fechaInicio: Calendar? = null
+    var fechaFin: Calendar? = null
 
+    // Variables
     val auxFirebase = AuxFirebase()
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun obtener(identificador: String) {
 
         auxFirebase.db.collection("torneos").document(identificador).get().addOnSuccessListener {
 
-            idTorneo = it.get("IdTorneo").toString()
+            idTorneo = it.id
             nombre = it.get("Nombre").toString()
-            descripcion = it.get("Usuario").toString()
+            descripcion = it.get("Deporte").toString()
             urlFoto = it.get("UrlFoto").toString()
 
-            GlobalScope.launch {
+            /*GlobalScope.launch {
                 deporte?.obtener(it.get("Deporte").toString())
                 creador?.obtener(it.get("Creador").toString())
-                participantes = creador?.obtenerListaParticipantes(null)
-            }
-            fechaInicio = LocalDateTime.parse(it.get("FechaInicio").toString())
-            fechaInicio = LocalDateTime.parse(it.get("FechaFin").toString())
-        }.await()
+            }*/
 
+            fechaInicio = it.get("FechaInicio") as Calendar?
+            fechaInicio = it.get("FechaFin") as Calendar?
+
+        }.await()
 
     }
 
@@ -57,11 +61,14 @@ class Torneo : DAO<Torneo> {
             auxFirebase.db.collection("torneos").document(it).set(
                 hashMapOf(
                     "Nombre" to nombre,
+                    "Deporte" to descripcion,
                     "Ubicacion" to ubicacion,
-                    "FechaInicio" to fechaInicio,
-                    "FechaFin" to fechaFin,
+                    "FechaInicio" to (fechaInicio?.time ?: "Sin fecha"),
+                    "FechaFin" to (fechaFin?.time ?: "Sin fecha"),
                     "Estado" to 0,
-                    "Creador" to (auxFirebase.auth.currentUser?.uid ?: "UID no encontrada")
+                    "Creador" to (auxFirebase.auth.currentUser?.uid ?: "UID no encontrada"),
+                    "UrlFoto" to urlFoto,
+                    "NumeroParticipantes" to numeroParticipantes
                 )
             )
         }
@@ -96,22 +103,15 @@ class Torneo : DAO<Torneo> {
 
                     torneo.idTorneo = document.id
                     torneo.nombre = document.get("Nombre").toString()
-                    torneo.descripcion = document.get("Usuario").toString()
+                    torneo.descripcion = document.get("Deporte").toString()
                     torneo.ubicacion = document.get("Ubicacion").toString()
-
-                    // urlFoto = document.get("UrlFoto").toString()
-
-                    /*GlobalScope.launch {
-                        deporte?.obtener(document.get("Deporte").toString())
-                        creador?.obtener(document.get("Creador").toString())
-                        participantes = creador?.obtenerListaParticipantes(null)
-                    }*/
-                    /*
-                    fechaInicio = LocalDateTime.parse(document.get("FechaInicio").toString())
-                    fechaInicio = LocalDateTime.parse(document.get("FechaFin").toString())*/
-                    fechaInicio = LocalDateTime.now()
-                    fechaFin = LocalDateTime.now()
-
+                    torneo.urlFoto = document.get("UrlFoto").toString()
+                    /*var timeInicio = document.get("FechaInicio"). as Timestamp
+                    var calendar = Calendar.getInstance()
+                    calendar.set(timeInicio.year, timeInicio.month, timeInicio.day)
+                    torneo.fechaInicio = calendar*/
+                    // torneo.fechaFin = document.get("FechaFin").toString() as Calendar?
+                    // torneo.numeroParticipantes = document.get("NumeroParticipantes") as Int
                     listaTorneos.add(torneo)
                 }
 

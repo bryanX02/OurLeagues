@@ -3,24 +3,17 @@ package com.example.ourleagues.fragments
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ListView
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import com.example.ourleagues.R
-import com.example.ourleagues.controlador.AppController
 import com.example.ourleagues.controlador.CrearTorneoController
-import com.example.ourleagues.modelo.AuxFirebase
-import com.example.ourleagues.modelo.Deporte
-import com.example.ourleagues.modelo.Torneo
-import com.example.ourleagues.modelo.Usuario
+import com.example.ourleagues.modelo.*
 import kotlinx.coroutines.launch
 
 class TorneosFragment : Fragment(), View.OnClickListener {
@@ -46,30 +39,29 @@ class TorneosFragment : Fragment(), View.OnClickListener {
 
         listViewListaTorneos = rootView.findViewById(R.id.listViewListaTorneos)
 
-        // Inserto todos los deportes del usuario en
+        // Empleare esta variable para obtener el listado de torneos
         var torneo = Torneo()
 
         lifecycleScope.launch() {
             listaTorneos = torneo.obtenerListado()
-            var listaNombres = arrayListOf<String>()
 
-            listaTorneos.forEach{
-                listaNombres.add(it.nombre.toString())
-            }
-            var adapter = ArrayAdapter(rootView.context, android.R.layout.simple_list_item_1, listaNombres)
+            var adapter = context?.let { activity?.let { it1 ->
+                AdaptadorTorneosActivos(it,
+                    it1, listaTorneos)
+            } }
+
             listViewListaTorneos.adapter = adapter
-
-
         }
-
         return rootView
     }
 
     override fun onClick(p0: View?) {
 
         // Lanzo una nueva activity para la creacion del torneo
+
         var intent = Intent(activity, CrearTorneoController::class.java)
         startActivity(intent)
+
 
     }
 

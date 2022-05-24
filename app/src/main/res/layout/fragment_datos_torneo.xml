@@ -73,6 +73,8 @@
         android:layout_below="@+id/txtFechaInicio"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:focusable="false"
         android:inputType="date"
         android:hint="20/05/2022" />
 
@@ -96,6 +98,8 @@
         android:inputType="date"
         android:layout_below="@+id/txtFechaFin"
         android:layout_toRightOf="@+id/eTxtFechaInicio"
+        android:clickable="true"
+        android:focusable="false"
         android:hint="20/05/2022" />
 
     <TextView

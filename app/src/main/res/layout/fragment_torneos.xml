@@ -36,84 +36,16 @@
         android:layout_marginLeft="80dp"
         android:text="Crear Torneo" />
 
-    <ScrollView
-        android:id="@+id/scrollViewListaTorneos"
+    <ListView
+        android:id="@+id/listViewListaTorneos"
         android:layout_width="wrap_content"
-        android:layout_height="500dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/btnCrearTorneo"
-        android:layout_marginTop="15dp">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/txtTorneosActivos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                android:text="Activos"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
-
-            <ListView
-                android:id="@+id/listViewListaTorneos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txtTorneosActivos"
-                android:layout_marginLeft="14dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="14dp"
-                android:divider="@null"
-                android:dividerHeight="10dp" />
-
-            <TextView
-                android:id="@+id/txtTorneosNoIniciados"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/listViewListaTorneos"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                android:text="Activos"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
-
-            <ListView
-                android:id="@+id/listViewListaTorneosNoIniciados"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txtTorneosNoIniciados"
-                android:layout_marginLeft="14dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="14dp"
-                android:divider="@null"
-                android:dividerHeight="10dp" />
-
-            <TextView
-                android:id="@+id/txtTorneosFinalizados"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/listViewListaTorneosNoIniciados"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                android:text="Activos"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
-
-            <ListView
-                android:id="@+id/listViewListaTorneosFinalizados"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txtTorneosFinalizados"
-                android:layout_marginLeft="14dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="14dp"
-                android:divider="@null"
-                android:dividerHeight="10dp" />
-
-        </RelativeLayout>
-
-    </ScrollView>
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginBottom="70dp"
+        android:divider="@null"
+        android:dividerHeight="10dp" />
 
 </RelativeLayout>
