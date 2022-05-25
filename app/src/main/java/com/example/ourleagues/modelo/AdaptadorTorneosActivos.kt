@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.ourleagues.R
 import com.example.ourleagues.controlador.TorneoController
+import com.example.ourleagues.fragments.TorneosFragment
 import com.squareup.picasso.Picasso
 
 class AdaptadorTorneosActivos (private val context: Context,
@@ -59,9 +60,10 @@ BaseAdapter() {
             var intent = Intent(activity, TorneoController::class.java)
             intent.putExtra("IdTorneo", torneo.idTorneo)
             // FALLA AQUI
-            context.startActivity(intent)
+            // context.startActivity(intent)
             /*activity.supportFragmentManager.findFragmentById(R.id.fragmentCreacionTorneos)
                 ?.startActivity(intent)*/
+            activity.startActivity(intent)
 
         }
 

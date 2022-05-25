@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.ourleagues.R
 import com.example.ourleagues.modelo.Torneo
 import com.squareup.picasso.Picasso
@@ -42,7 +43,7 @@ class TorneoController : AppCompatActivity(), View.OnClickListener {
         // Obtengo el torneo con el id del torneo que se pulso en la lista que nos llevo a este activity
         var extras = intent.extras
         var idTorneo = extras?.getString("IdTorneo")
-        GlobalScope.launch {
+        lifecycleScope.launch {
             if (idTorneo != null) {
                 torneo.obtener(idTorneo)
 

@@ -9,6 +9,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.sql.Timestamp
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
@@ -25,8 +26,8 @@ class Torneo : DAO<Torneo> {
     var deporte: Deporte? = Deporte()
     var creador: Usuario? = Usuario()
     var numeroParticipantes: Int = 0
-    var fechaInicio: Calendar? = null
-    var fechaFin: Calendar? = null
+    var fechaInicio: Calendar = Calendar.getInstance()
+    var fechaFin: Calendar = Calendar.getInstance()
 
     // Variables
     val auxFirebase = AuxFirebase()
@@ -36,17 +37,17 @@ class Torneo : DAO<Torneo> {
         auxFirebase.db.collection("torneos").document(identificador).get().addOnSuccessListener {
 
             idTorneo = it.id
-            nombre = it.get("Nombre").toString()
-            descripcion = it.get("Deporte").toString()
-            urlFoto = it.get("UrlFoto").toString()
+            nombre = it.getString("Nombre")
+            descripcion = it.getString("Deporte")
+            urlFoto = it.getString("UrlFoto")
 
             /*GlobalScope.launch {
                 deporte?.obtener(it.get("Deporte").toString())
                 creador?.obtener(it.get("Creador").toString())
             }*/
 
-            fechaInicio = it.get("FechaInicio") as Calendar?
-            fechaInicio = it.get("FechaFin") as Calendar?
+            fechaInicio.time = it.getDate("FechaInicio")
+            fechaFin.time = it.getDate("FechaFin")
 
         }.await()
 
