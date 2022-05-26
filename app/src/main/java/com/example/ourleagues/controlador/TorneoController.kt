@@ -27,9 +27,6 @@ class TorneoController : AppCompatActivity(), View.OnClickListener {
     // Variable torneo que empleare en varios métodos y funciones
     private var torneo = Torneo()
 
-    // Variables que recogeran datos
-    var idTorneo = "No llego la IdTorneo"
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,20 +41,36 @@ class TorneoController : AppCompatActivity(), View.OnClickListener {
 
         // Obtengo el torneo con el id del torneo que se pulso en la lista que nos llevo a este activity
         var extras = intent.extras
+        var idTorneo = extras?.getString("IdTorneo")
+
+        // Lanzo una tarea dentro del hilo principal de la vista
         lifecycleScope.launch {
+            if (idTorneo != null) {
 
-            torneo.obtener("9UgydjWzbFcsbUdtkBvXQVJcda22")
+                // Instancio el torneo correspondiente
+                torneo.obtener(idTorneo)
 
-            Log.d(":::LOG", torneo.urlFoto.toString())
-            txtTituloNombreTorneo.text = torneo.nombre
-            txtDescripcionTorneo.text = torneo.descripcion
-            txtUbicacionTorneo.text = torneo.ubicacion
-            Picasso.get().load(torneo.urlFoto).into(imgTorneo)
+                // Inserto los datos del torneo
+                txtTituloNombreTorneo.text = torneo.nombre
+                txtDescripcionTorneo.text = "Torneo de " + torneo.descripcion
+                txtUbicacionTorneo.text = torneo.ubicacion
+                txtEstadoTorneo.text = "Activo"
+                Picasso.get().load(torneo.urlFoto).into(imgTorneo)
 
-            cargarFragmentsPaginador()
+                // Cargo los fragments con sus datos correspondientes
+                cargarFragmentsPaginador()
 
+                /* CARGARAN 3 FRAGMENTS
+                *
+                * ParticipantesFragment
+                * PartidosFragment
+                * EstadisticasFragment
+                *
+                * Estos fragments mostraran los datos, correspondientes a su nombre, del torneo, en un ViewPager
+                *
+                */
+            }
         }
-
 
 
     }
@@ -65,7 +78,7 @@ class TorneoController : AppCompatActivity(), View.OnClickListener {
     private fun cargarFragmentsPaginador() {
 
         val viewPager = findViewById<ViewPager>(R.id.viewPagerTorneo)
-        viewPager.adapter = AdaptadorPaginadorTorneo(supportFragmentManager)
+        viewPager.adapter = AdaptadorPaginadorTorneo(supportFragmentManager, torneo.idTorneo.toString())
 
         val tabLayout = findViewById<TabLayout>(R.id.tabLayoutTorneo)
         tabLayout.setupWithViewPager(viewPager)
@@ -75,6 +88,5 @@ class TorneoController : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         TODO("Not yet implemented")
     }
-
 
 }

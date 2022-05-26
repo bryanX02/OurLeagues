@@ -35,12 +35,7 @@ class Torneo : DAO<Torneo> {
             nombre = it.getString("Nombre")
             descripcion = it.getString("Deporte")
             urlFoto = it.getString("UrlFoto")
-
-            /*GlobalScope.launch {
-                deporte?.obtener(it.get("Deporte").toString())
-                creador?.obtener(it.get("Creador").toString())
-            }*/
-
+            ubicacion = it.getString("Ubicacion")
             fechaInicio.time = it.getTimestamp("FechaInicio")?.toDate() ?: Calendar.getInstance().time
             fechaFin.time = it.getTimestamp("FechaFin")?.toDate() ?: Calendar.getInstance().time
 
@@ -70,7 +65,6 @@ class Torneo : DAO<Torneo> {
         }
 
         if (idTorneo?.let { auxFirebase.db.collection("torneos").document(it).get() } != null){
-
 
             creado = true
             crearParticipaciones()
@@ -122,7 +116,6 @@ class Torneo : DAO<Torneo> {
         TODO("Not yet implemented")
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun obtenerListado(): ArrayList<Torneo> {
         
         var listaTorneos : ArrayList<Torneo> = arrayListOf()
@@ -142,7 +135,6 @@ class Torneo : DAO<Torneo> {
                     torneo.urlFoto = document.get("UrlFoto").toString()
                     listaTorneos.add(torneo)
                 }
-
             }
 
         }.await()

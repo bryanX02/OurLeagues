@@ -7,9 +7,15 @@ import com.example.ourleagues.fragment.torneoviewpager.EstadisticasFragment
 import com.example.ourleagues.fragment.torneoviewpager.ParticipantesFragment
 import com.example.ourleagues.fragment.torneoviewpager.PartidosFragment
 
-class AdaptadorPaginadorTorneo (fm: FragmentManager) : FragmentPagerAdapter(fm) {
+// No se ha encontrado la forma adecuado de realizar el paginador si evitar este reciente aviso de deprecated del FragmentPagerAdapter
+class AdaptadorPaginadorTorneo (fm: FragmentManager, idTorneoConstructor: String) : FragmentPagerAdapter(fm) {
 
-    // AQUI ME QUEDE, COMO HACER PAGINADOR SIN DEPRECATED
+    var idTorneo = "SinId"
+
+    init {
+       idTorneo = idTorneoConstructor
+    }
+
     override fun getCount(): Int {
         return 3;
     }
@@ -17,16 +23,16 @@ class AdaptadorPaginadorTorneo (fm: FragmentManager) : FragmentPagerAdapter(fm) 
     override fun getItem(position: Int): Fragment {
         when(position) {
             0 -> {
-                return ParticipantesFragment()
+                return ParticipantesFragment(idTorneo)
             }
             1 -> {
-                return PartidosFragment()
+                return PartidosFragment(idTorneo)
             }
             2 -> {
-                return EstadisticasFragment()
+                return EstadisticasFragment(idTorneo)
             }
             else -> {
-                return ParticipantesFragment()
+                return ParticipantesFragment(idTorneo)
             }
         }
     }
@@ -34,13 +40,13 @@ class AdaptadorPaginadorTorneo (fm: FragmentManager) : FragmentPagerAdapter(fm) 
     override fun getPageTitle(position: Int): CharSequence? {
         when(position) {
             0 -> {
-                return "Tab 1"
+                return "Participantes"
             }
             1 -> {
-                return "Tab 2"
+                return "Partidos"
             }
             2 -> {
-                return "Tab 3"
+                return "Estadísticas"
             }
         }
         return super.getPageTitle(position)

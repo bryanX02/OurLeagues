@@ -48,19 +48,20 @@ BaseAdapter() {
         var txtDescripcion : TextView = rowView.findViewById(R.id.txtDescripcionTorneoActivo)
         var txtDatos : TextView = rowView.findViewById(R.id.txtDatosTorneoActivo)
 
+        // Declaro e instancio el controlador de la actividad que mostrara los datos de los torneos
+        var intent = Intent(activity, TorneoController::class.java)
+
         // Inserto los datos a cada fila (para la foto empleo la libreria Picasso)
         Picasso.get().load(torneo.urlFoto).into(imgTorneo)
         txtNombre.text = torneo.nombre
         txtDescripcion.text = "Torneo de " + torneo.descripcion
         txtDatos.text = torneo.ubicacion
 
-        // Creo una instancia del activity al que pasare, añadiendo el id del torneo
-        var torneoController = TorneoController()
-        torneoController.idTorneo = torneo.idTorneo!!
-
+        // Le establezco un escuchador a los torneos que apareceran el en listview
         rowView.setOnClickListener{
 
-            var intent = Intent(activity, torneoController::class.java)
+            // Cuando pulse un torneo se abrira la actividad que mostrara sus detalles
+            intent.putExtra("IdTorneo", torneo.idTorneo)
             activity.startActivity(intent)
 
         }
