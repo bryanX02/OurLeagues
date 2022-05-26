@@ -14,9 +14,12 @@ class ParticipantesTorneoFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setFragmentResultListener("DatosTorneo") { requestKey, bundle ->
-            val result1 = bundle.getString("NombreTorneo")
+            val result1 = bundle.getString("IdTorneo")
             val result2 = bundle.getInt("NumeroEquipos")
             Log.d(":::Log", result1 + result2)
+
+            
+
         }
     }
     override fun onCreateView(

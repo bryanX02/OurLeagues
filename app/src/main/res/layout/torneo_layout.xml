@@ -57,23 +57,18 @@
         android:textColor="@color/black"
         android:text="Activo"/>
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayoutTorneo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtEstadoTorneo"
+        android:layout_marginTop="15dp">
+    </com.google.android.material.tabs.TabLayout>
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPagerTorneo"
         android:layout_width="match_parent"
         android:layout_height="540dp"
-        android:layout_below="@id/txtEstadoTorneo"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
-
-        <androidx.viewpager.widget.PagerTabStrip
-            android:id="@+id/pagerHeaderTorneo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:paddingBottom="4dp"
-            android:paddingTop="4dp" />
-
-    </androidx.viewpager.widget.ViewPager>
+        android:layout_below="@id/tabLayoutTorneo"/>
 
 </RelativeLayout>

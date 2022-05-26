@@ -8,8 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.viewpager.widget.ViewPager
 import com.example.ourleagues.R
+import com.example.ourleagues.modelo.AdaptadorPaginadorTorneo
 import com.example.ourleagues.modelo.Torneo
+import com.google.android.material.tabs.TabLayout
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -52,9 +55,21 @@ class TorneoController : AppCompatActivity(), View.OnClickListener {
                 txtUbicacionTorneo.text = torneo.ubicacion
                 Picasso.get().load(torneo.urlFoto).into(imgTorneo)
 
+                cargarFragmentsPaginador()
+
             }
         }
 
+
+    }
+
+    private fun cargarFragmentsPaginador() {
+
+        val viewPager = findViewById<ViewPager>(R.id.viewPagerTorneo)
+        viewPager.adapter = AdaptadorPaginadorTorneo(supportFragmentManager)
+
+        val tabLayout = findViewById<TabLayout>(R.id.tabLayoutTorneo)
+        tabLayout.setupWithViewPager(viewPager)
 
     }
 
