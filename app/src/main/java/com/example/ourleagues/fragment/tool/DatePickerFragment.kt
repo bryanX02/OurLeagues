@@ -1,4 +1,4 @@
-package com.example.ourleagues.fragments
+package com.example.ourleagues.fragment.tool
 
 import android.app.DatePickerDialog
 import android.app.Dialog

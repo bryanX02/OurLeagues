@@ -1,4 +1,4 @@
-package com.example.ourleagues.fragments
+package com.example.ourleagues.fragment.app
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,4 +1,4 @@
-package com.example.ourleagues.modelo
+package com.example.ourleagues.modelo.adaptador
 
 import android.content.Context
 import android.util.Log
@@ -13,7 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.setFragmentResult
 import com.example.ourleagues.R
-import com.example.ourleagues.fragments.DatosTorneoFragment
+import com.example.ourleagues.fragment.creartorneo.DatosTorneoFragment
+import com.example.ourleagues.modelo.Deporte
 import com.squareup.picasso.Picasso
 
 class AdaptadorDeportes (private val context: Context,

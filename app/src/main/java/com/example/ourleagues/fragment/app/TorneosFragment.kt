@@ -1,4 +1,4 @@
-package com.example.ourleagues.fragments
+package com.example.ourleagues.fragment.app
 
 import android.content.Intent
 import android.os.Build
@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.ourleagues.R
 import com.example.ourleagues.controlador.CrearTorneoController
 import com.example.ourleagues.modelo.*
+import com.example.ourleagues.modelo.adaptador.AdaptadorTorneosActivos
 import kotlinx.coroutines.launch
 
 class TorneosFragment : Fragment(), View.OnClickListener {

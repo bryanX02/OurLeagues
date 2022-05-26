@@ -1,26 +1,20 @@
-package com.example.ourleagues.fragments
+package com.example.ourleagues.fragment.creartorneo
 
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import androidx.annotation.RequiresApi
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import com.example.ourleagues.R
+import com.example.ourleagues.fragment.tool.DatePickerFragment
 import com.example.ourleagues.modelo.AuxFirebase
 import com.example.ourleagues.modelo.Deporte
 import com.example.ourleagues.modelo.Torneo
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
 
 

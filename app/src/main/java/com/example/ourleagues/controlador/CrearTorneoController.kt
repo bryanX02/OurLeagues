@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.ourleagues.R
-import com.example.ourleagues.fragments.ListaDeportesFragment
+import com.example.ourleagues.fragment.creartorneo.ListaDeportesFragment
 
 class CrearTorneoController : AppCompatActivity(){
 

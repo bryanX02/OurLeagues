@@ -1,4 +1,4 @@
-package com.example.ourleagues.modelo
+package com.example.ourleagues.modelo.adaptador
 
 import android.content.Context
 import android.content.Intent
@@ -8,11 +8,10 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.ourleagues.R
 import com.example.ourleagues.controlador.TorneoController
-import com.example.ourleagues.fragments.TorneosFragment
+import com.example.ourleagues.modelo.Torneo
 import com.squareup.picasso.Picasso
 
 class AdaptadorTorneosActivos (private val context: Context,

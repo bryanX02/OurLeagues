@@ -1,4 +1,4 @@
-package com.example.ourleagues.fragments
+package com.example.ourleagues.fragment.creartorneo
 
 import android.os.Bundle
 import android.util.Log
@@ -18,7 +18,7 @@ class ParticipantesTorneoFragment : Fragment() {
             val result2 = bundle.getInt("NumeroEquipos")
             Log.d(":::Log", result1 + result2)
 
-            
+
 
         }
     }

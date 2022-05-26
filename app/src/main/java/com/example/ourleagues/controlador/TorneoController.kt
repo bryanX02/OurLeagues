@@ -1,8 +1,6 @@
 package com.example.ourleagues.controlador
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -10,11 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import com.example.ourleagues.R
-import com.example.ourleagues.modelo.AdaptadorPaginadorTorneo
+import com.example.ourleagues.modelo.adaptador.AdaptadorPaginadorTorneo
 import com.example.ourleagues.modelo.Torneo
 import com.google.android.material.tabs.TabLayout
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class TorneoController : AppCompatActivity(), View.OnClickListener {
@@ -29,7 +26,7 @@ class TorneoController : AppCompatActivity(), View.OnClickListener {
     // Variable torneo que empleare en varios métodos y funciones
     private var torneo = Torneo()
 
-    // Variables de las clases de los fragments que se veran del torneo
+    // Variables de las clases de los fragment que se veran del torneo
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.example.ourleagues.fragments
+package com.example.ourleagues.fragment.creartorneo
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.ourleagues.R
-import com.example.ourleagues.modelo.AdaptadorDeportes
+import com.example.ourleagues.modelo.adaptador.AdaptadorDeportes
 import com.example.ourleagues.modelo.Deporte
 import kotlinx.coroutines.launch
 

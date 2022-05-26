@@ -3,19 +3,13 @@ package com.example.ourleagues.controlador
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.replace
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.ourleagues.R
-import com.example.ourleagues.fragments.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
+import com.example.ourleagues.fragment.app.*
 import kotlinx.android.synthetic.main.app_layout.*
 
 class AppController : AppCompatActivity(){
 
-    // Varibles que controlaran a los fragments
+    // Varibles que controlaran a los fragment
     private val inicioFragment = InicioFragment()
     private val amigosFragment = AmigosFragment()
     private val torneosFragment = TorneosFragment()

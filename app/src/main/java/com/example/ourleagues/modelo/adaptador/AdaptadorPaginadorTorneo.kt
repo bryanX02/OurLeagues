@@ -1,12 +1,11 @@
-package com.example.ourleagues.modelo
+package com.example.ourleagues.modelo.adaptador
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.ourleagues.fragments.EstadisticasFragment
-import com.example.ourleagues.fragments.ParticipantesFragment
-import com.example.ourleagues.fragments.PartidosFragment
+import com.example.ourleagues.fragment.torneoviewpager.EstadisticasFragment
+import com.example.ourleagues.fragment.torneoviewpager.ParticipantesFragment
+import com.example.ourleagues.fragment.torneoviewpager.PartidosFragment
 
 class AdaptadorPaginadorTorneo (fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
