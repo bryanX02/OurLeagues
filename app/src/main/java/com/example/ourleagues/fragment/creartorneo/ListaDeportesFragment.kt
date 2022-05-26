@@ -23,8 +23,10 @@ class ListaDeportesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        // Obtengo la vista sobre la que trabajare
         var rootView = inflater.inflate(R.layout.fragment_lista_deportes, container, false)
 
+        // Instancio las variables de la vista
         listViewDeportes = rootView.findViewById(R.id.listViewDeportes)
 
         var deporte = Deporte()

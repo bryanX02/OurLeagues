@@ -34,10 +34,9 @@
         android:layout_width="200dp"
         android:layout_height="135dp"
         android:layout_below="@id/eTxtNombreTorneo"
-        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/custom_input"
-        android:src="@drawable/baloncesto"/>
+        android:layout_marginTop="20dp"
+        android:src="@drawable/baloncesto" />
 
     <TextView
         android:id="@+id/txtUbicacion"

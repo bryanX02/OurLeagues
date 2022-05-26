@@ -36,6 +36,7 @@ class PerfilFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
 
+        // Obtengo la vista sobre la que trabajare
         var rootView = inflater.inflate(R.layout.fragment_perfil, container, false)
 
         // Obtengo las variable cuando entra a la pantalla

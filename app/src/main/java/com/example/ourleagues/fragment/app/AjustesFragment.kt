@@ -12,11 +12,6 @@ import com.example.ourleagues.controlador.MainActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AjustesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AjustesFragment : Fragment() {
 
     private lateinit var btnLogout : Button
@@ -26,6 +21,7 @@ class AjustesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        // Obtengo la vista sobre la que trabajare
         var rootView = inflater.inflate(R.layout.fragment_ajustes, container, false)
 
         btnLogout = rootView.findViewById(R.id.btnLogout)
@@ -37,7 +33,6 @@ class AjustesFragment : Fragment() {
             }
         }
 
-        // Inflate the layout for this fragment
         return rootView
 
     }

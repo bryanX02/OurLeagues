@@ -34,6 +34,7 @@ class TorneosFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
 
+        // Obtengo la vista sobre la que trabajare
         var rootView = inflater.inflate(R.layout.fragment_torneos, container, false)
 
         btnCrearTorneo = rootView.findViewById(R.id.btnCrearTorneo)

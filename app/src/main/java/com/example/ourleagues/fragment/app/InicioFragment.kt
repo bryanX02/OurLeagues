@@ -22,6 +22,7 @@ class InicioFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        // Obtengo la vista sobre la que trabajare
         var rootView = inflater.inflate(R.layout.fragment_inicio, container, false)
 
         txtUser = rootView.findViewById(R.id.txtUser)

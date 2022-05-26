@@ -9,11 +9,26 @@
         android:id="@+id/txtTituloAmigos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="¡Participa con tus amigos!"
         android:textColor="@color/azulOscuro"
-        android:text="AMIGOS"
-        android:textSize="40dp" />
+        android:textSize="20dp" />
 
+    <TextView
+        android:id="@+id/txtListaAmigos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtTituloAmigos"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:text="Lista de amigos"/>
+
+    <ScrollView
+        android:id="@+id/scrollViewAmigos"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_below="@+id/txtListaAmigos"
+        android:layout_marginTop="25dp"/>
 
 </RelativeLayout>

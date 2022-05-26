@@ -1,6 +1,7 @@
 package com.example.ourleagues.modelo
 
 import android.util.Log
+import android.view.View
 import com.example.ourleagues.modelo.herramienta.AuxFirebase
 import com.example.ourleagues.modelo.interfaz.DAO
 import com.google.firebase.ktx.Firebase
@@ -8,11 +9,16 @@ import kotlinx.coroutines.tasks.await
 
 class Participacion : DAO<Participacion> {
 
+    // Atributos
     var idParticipacion : String? = "defaultValue"
     var idTorneo : String? = "defaultValue"
     var idPaticipante : String? = "defaultValue"
     var nombreParticipante : String? = "defaultValue"
     var estado : Int? = 0
+
+    // Esta variable se usara para poder almacenar la vista de cada Paticipacion
+    var viewParticipante : View? = null
+    var viewInstanciado = false
 
     val auxFirebase = AuxFirebase()
 

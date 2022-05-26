@@ -75,11 +75,14 @@ class TorneoController : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    // Este método crear un adaptador que carga los fragments
     private fun cargarFragmentsPaginador() {
 
+        // Obtengo e instancio el viewPager donde se mostraran los fragments
         val viewPager = findViewById<ViewPager>(R.id.viewPagerTorneo)
         viewPager.adapter = AdaptadorPaginadorTorneo(supportFragmentManager, torneo.idTorneo.toString())
 
+        // Obtengo e instancio el header que mostrara la ubicacion actual entre los fragments
         val tabLayout = findViewById<TabLayout>(R.id.tabLayoutTorneo)
         tabLayout.setupWithViewPager(viewPager)
 

@@ -26,17 +26,17 @@
 
     <ListView
         android:id="@+id/listViewParticipantes"
-        android:layout_width="wrap_content"
-        android:layout_height="450dp"
+        android:layout_width="320dp"
+        android:layout_height="500dp"
         android:layout_below="@id/txtInsertarParticipantes"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="20dp"
         android:divider="@null"
         android:dividerHeight="10dp" />
 
     <Button
-        android:id="@+id/btnCrearTorneo"
+        android:id="@+id/btnGuardarParticipantes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/listViewParticipantes"
@@ -44,8 +44,8 @@
         android:layout_marginTop="25dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:text="CREAR"
+        android:text="Guardar"
         android:textColor="@color/blanco_roto"
-        android:textSize="12sp" />
+        android:textSize="16sp" />
 
 </RelativeLayout>

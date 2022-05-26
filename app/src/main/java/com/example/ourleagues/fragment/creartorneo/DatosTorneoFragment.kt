@@ -68,14 +68,13 @@ class DatosTorneoFragment : Fragment(), View.OnClickListener {
 
         // Obtengo el torneo que se selecciono
         setFragmentResultListener("Deporte") { requestKey, bundle ->
-            val result1 = bundle.getString("Nombre")
-            if (result1 != null) {
-                lifecycleScope.launch() {
-                    deporte.obtener(result1)
+            lifecycleScope.launch() {
+                    bundle.getString("Nombre")?.let { deporte.obtener(it) }
                     Picasso.get().load(deporte.urlFoto).into(imgDeporte)
-                }
             }
         }
+
+        //
 
         return rootView
     }
@@ -101,7 +100,6 @@ class DatosTorneoFragment : Fragment(), View.OnClickListener {
 
                         if (torneo.crearTorneo()){
                             // Cuando se crear el toreno paso al fragment para que se inserten los participantes
-                            Log.d(":::LOG", torneo.idTorneo!!)
                             var participantesTorneoFragment = ParticipantesTorneoFragment()
                             participantesTorneoFragment.idTorneo = torneo.idTorneo!!
 
@@ -137,6 +135,7 @@ class DatosTorneoFragment : Fragment(), View.OnClickListener {
         activity?.let { datePicker.show(it.supportFragmentManager, "datePicker") }
     }
 
+    // Metodo que empleo para dedicir que hacer cuando se lanze el datePicker
     private fun onDateSelected(day: Int, month: Int, year: Int) {
 
         var fecha = Calendar.getInstance()
@@ -153,6 +152,7 @@ class DatosTorneoFragment : Fragment(), View.OnClickListener {
 
     }
 
+    // Metodo que empleo apra cambiar entre fragments
     private fun replaceFragment (fragment: Fragment){
         if (fragment != null) {
             val transaction = activity?.supportFragmentManager?.beginTransaction()
