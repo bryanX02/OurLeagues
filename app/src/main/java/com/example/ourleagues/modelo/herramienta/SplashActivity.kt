@@ -1,4 +1,4 @@
-package com.example.ourleagues.modelo.tool
+package com.example.ourleagues.modelo.herramienta
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

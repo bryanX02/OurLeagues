@@ -1,6 +1,4 @@
-package com.example.ourleagues.modelo
-
-import io.grpc.Context
+package com.example.ourleagues.modelo.interfaz
 
 interface DAO <T> {
 

@@ -6,8 +6,7 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ourleagues.R
-import com.example.ourleagues.modelo.AuxFirebase
-import com.google.firebase.auth.FirebaseAuth
+import com.example.ourleagues.modelo.herramienta.AuxFirebase
 import com.google.firebase.auth.FirebaseUser
 
 

@@ -62,16 +62,10 @@ class AdaptadorDeportes (private val context: Context,
             activity.supportFragmentManager.findFragmentById(R.id.fragmentCreacionTorneos)
                 ?.setFragmentResult("Deporte", bundleOf("Nombre" to deporte.nombre))
 
-            when (deporte.nombre) {
+            // Cambio al fragments de datos
+            replaceFragment(DatosTorneoFragment())
 
-                "Baloncesto" -> replaceFragment(DatosTorneoFragment())
-
-            }         
-
-            /*var intent = Intent(context, TorneoController::class.java)
-            intent.putExtra("Deporte", deporte.nombre)*/
         }
-
 
         return rowView
 

@@ -8,13 +8,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ourleagues.R
-import com.example.ourleagues.modelo.AuxFirebase
-import com.google.firebase.auth.FirebaseAuth
+import com.example.ourleagues.modelo.herramienta.AuxFirebase
 import com.google.firebase.auth.FirebaseAuthEmailException
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class LoginController  : AppCompatActivity(), View.OnClickListener {
 
@@ -30,7 +27,6 @@ class LoginController  : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_layout)
-        getSupportActionBar()?.hide();
 
         // Instancio las variables
         eTxtEmail = findViewById(R.id.eTxtEmail)
@@ -62,25 +58,28 @@ class LoginController  : AppCompatActivity(), View.OnClickListener {
 
     private fun login(email: String, pass: String){
 
-        // Me gustaria devolver una varible boolean, pero dentro del task los cambios de varible no se guardan
-        // var logeado : Boolean = false;
-
+        // Empleo el servicio de Firebase Athentication para comprobar y ejecutar el login
         auxFirebase.auth.signInWithEmailAndPassword(email, pass)
             .addOnCompleteListener(this){task ->
                 if (task.isSuccessful) {
+
+                    // Si se puedo iniciar sesion, inicio la actividad principal de la app
                     startActivity(Intent(this, AppController::class.java))
                     finish()
+
                 } else {
+
+                    // Si hubo algún error, compruebo las excepciones que pudo almazenar task
                     try {
                         throw task.exception!!
                     } catch (e: FirebaseAuthInvalidCredentialsException) {
-                        Toast.makeText(this, "Invalid Password", Toast.LENGTH_LONG)
+                        Toast.makeText(this, "Contraseña incorrecta", Toast.LENGTH_LONG)
                             .show()
                     } catch (e: FirebaseAuthEmailException) {
-                        Toast.makeText(this, "Invalid Email", Toast.LENGTH_LONG)
+                        Toast.makeText(this, "Email no encontrado", Toast.LENGTH_LONG)
                             .show()
                     } catch (e: FirebaseAuthException) {
-                        Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_LONG)
+                        Toast.makeText(this, "Datos incorrectos", Toast.LENGTH_LONG)
                             .show()
                     } catch (e: Exception) {
                         e.printStackTrace()

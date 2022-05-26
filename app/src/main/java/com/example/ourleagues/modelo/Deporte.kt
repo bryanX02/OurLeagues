@@ -1,11 +1,11 @@
 package com.example.ourleagues.modelo
 
 import android.util.Log
-import android.widget.Toast
+import com.example.ourleagues.modelo.herramienta.AuxFirebase
+import com.example.ourleagues.modelo.interfaz.DAO
 import kotlinx.coroutines.tasks.await
-import java.io.Serializable
 
-class Deporte : DAO<Deporte>{
+class Deporte : DAO<Deporte> {
 
     var nombre : String? = "defaultValue"
     var descripcion : String? = "defaultValue"

@@ -1,6 +1,5 @@
 package com.example.ourleagues.controlador
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,12 +8,11 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ourleagues.R
-import com.example.ourleagues.modelo.AuxFirebase
+import com.example.ourleagues.modelo.herramienta.AuxFirebase
 import com.example.ourleagues.modelo.Usuario
 import com.google.firebase.auth.*
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class SingupController : AppCompatActivity(), View.OnClickListener {
 
@@ -46,10 +44,11 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View?) {
 
+        // Obtengo los datos insertados en los EditText
         val email = eTxtEmailRegistro.text.toString()
         val password = eTxtPassword.text.toString()
 
-        // Si no estan vacios los campos realiza singup
+        // Si los campos no estan vacios se realiza el singup
         if (email.isNotEmpty() && password.isNotEmpty()){
 
             singup(email, password)
@@ -61,11 +60,15 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
     // Metodo para registrar el usuario
     private fun singup (emailRegistro: String, password: String) {
 
+        // Si se logro el signup,
+        var usuario = Usuario()
+
+        // Empleo el servicio de Firebase Authentication para realizar el singup
         auxFirebase.auth.createUserWithEmailAndPassword(emailRegistro, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
 
-                    var usuario = Usuario()
+                    // Si se logro el signup, instancio mi objeto Usuario para insertar los datos extra en la bd de cloud firestore
                     usuario.UID = auxFirebase.auth.currentUser?.uid.toString()
                     usuario.email = emailRegistro
                     usuario.nombre = eTxtNombre.text.toString()
@@ -79,6 +82,7 @@ class SingupController : AppCompatActivity(), View.OnClickListener {
                     }
 
                 } else {
+
                     try {
                         throw task.exception!!
                     } catch (e: FirebaseAuthInvalidCredentialsException) {

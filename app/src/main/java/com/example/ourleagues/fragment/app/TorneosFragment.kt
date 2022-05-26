@@ -15,6 +15,7 @@ import com.example.ourleagues.R
 import com.example.ourleagues.controlador.CrearTorneoController
 import com.example.ourleagues.modelo.*
 import com.example.ourleagues.modelo.adaptador.AdaptadorTorneosActivos
+import com.example.ourleagues.modelo.herramienta.AuxFirebase
 import kotlinx.coroutines.launch
 
 class TorneosFragment : Fragment(), View.OnClickListener {

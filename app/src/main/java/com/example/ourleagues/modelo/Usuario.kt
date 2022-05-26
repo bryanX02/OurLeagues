@@ -1,10 +1,11 @@
 package com.example.ourleagues.modelo
 
-import android.util.Log
+import com.example.ourleagues.modelo.herramienta.AuxFirebase
+import com.example.ourleagues.modelo.interfaz.DAO
 import kotlinx.coroutines.tasks.await
 import java.util.Date
 
-class Usuario : DAO<Usuario>{
+class Usuario : DAO<Usuario> {
 
     var UID: String = "defaultValue"
     var email: String = "defaultValue"

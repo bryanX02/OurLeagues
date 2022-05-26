@@ -1,17 +1,12 @@
 package com.example.ourleagues.modelo
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.lifecycleScope
-import com.google.type.DateTime
+import com.example.ourleagues.modelo.herramienta.AuxFirebase
+import com.example.ourleagues.modelo.interfaz.DAO
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import java.sql.Timestamp
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -46,11 +41,43 @@ class Torneo : DAO<Torneo> {
                 creador?.obtener(it.get("Creador").toString())
             }*/
 
-            fechaInicio.time = it.getDate("FechaInicio")
-            fechaFin.time = it.getDate("FechaFin")
+            fechaInicio.time = it.getTimestamp("FechaInicio")?.toDate() ?: Calendar.getInstance().time
+            fechaFin.time = it.getTimestamp("FechaFin")?.toDate() ?: Calendar.getInstance().time
 
         }.await()
 
+    }
+
+    suspend fun crearTorneo(): Boolean {
+
+        var creado = false
+
+        // Creo el torneo
+        idTorneo?.let {
+            auxFirebase.db.collection("torneos").document(it).set(
+                hashMapOf(
+                    "Nombre" to nombre,
+                    "Deporte" to descripcion,
+                    "Ubicacion" to ubicacion,
+                    "FechaInicio" to (fechaInicio?.time ?: "Sin fecha"),
+                    "FechaFin" to (fechaFin?.time ?: "Sin fecha"),
+                    "Estado" to 0,
+                    "Creador" to (auxFirebase.auth.currentUser?.uid ?: "UID no encontrada"),
+                    "UrlFoto" to urlFoto,
+                    "NumeroParticipantes" to numeroParticipantes
+                )
+            )
+        }
+
+        if (idTorneo?.let { auxFirebase.db.collection("torneos").document(it).get() } != null){
+
+
+            creado = true
+            crearParticipaciones()
+
+        }
+
+        return creado
     }
 
     override fun crear(): Boolean {
@@ -75,7 +102,13 @@ class Torneo : DAO<Torneo> {
         }
 
         if (idTorneo?.let { auxFirebase.db.collection("torneos").document(it).get() } != null){
+
             creado = true
+
+            GlobalScope.launch{
+                crearParticipaciones()
+            }
+
         }
 
         return creado
@@ -107,12 +140,6 @@ class Torneo : DAO<Torneo> {
                     torneo.descripcion = document.get("Deporte").toString()
                     torneo.ubicacion = document.get("Ubicacion").toString()
                     torneo.urlFoto = document.get("UrlFoto").toString()
-                    /*var timeInicio = document.get("FechaInicio"). as Timestamp
-                    var calendar = Calendar.getInstance()
-                    calendar.set(timeInicio.year, timeInicio.month, timeInicio.day)
-                    torneo.fechaInicio = calendar*/
-                    // torneo.fechaFin = document.get("FechaFin").toString() as Calendar?
-                    // torneo.numeroParticipantes = document.get("NumeroParticipantes") as Int
                     listaTorneos.add(torneo)
                 }
 
@@ -122,6 +149,23 @@ class Torneo : DAO<Torneo> {
 
         return listaTorneos
         
+    }
+
+    suspend fun crearParticipaciones() {
+
+        var participacion = Participacion()
+
+        // Ahora creo las participaciones, es decir, creo unos participantes por defecto
+        for (i in 1..numeroParticipantes) {
+
+            participacion.idParticipacion = UUID.randomUUID().toString()
+            participacion.idTorneo = idTorneo
+            participacion.idPaticipante = "Guest"
+            participacion.nombreParticipante = "Partipante $i"
+            participacion.crearParticipacion()
+
+        }
+
     }
 
 }

@@ -54,14 +54,13 @@ BaseAdapter() {
         txtDescripcion.text = "Torneo de " + torneo.descripcion
         txtDatos.text = torneo.ubicacion
 
+        // Creo una instancia del activity al que pasare, añadiendo el id del torneo
+        var torneoController = TorneoController()
+        torneoController.idTorneo = torneo.idTorneo!!
+
         rowView.setOnClickListener{
 
-            var intent = Intent(activity, TorneoController::class.java)
-            intent.putExtra("IdTorneo", torneo.idTorneo)
-            // FALLA AQUI
-            // context.startActivity(intent)
-            /*activity.supportFragmentManager.findFragmentById(R.id.fragmentCreacionTorneos)
-                ?.startActivity(intent)*/
+            var intent = Intent(activity, torneoController::class.java)
             activity.startActivity(intent)
 
         }

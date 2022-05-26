@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.lifecycleScope
 import com.example.ourleagues.R
-import com.example.ourleagues.modelo.AuxFirebase
+import com.example.ourleagues.modelo.herramienta.AuxFirebase
 import com.example.ourleagues.modelo.Usuario
 import kotlinx.coroutines.launch
 

@@ -6,28 +6,40 @@
     tools:context=".fragment.creartorneo.ParticipantesTorneoFragment">
 
     <TextView
-        android:id="@+id/txtTituloEquiposBaloncesto"
+        android:id="@+id/txtInsertarParticipantes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="24dp"
         android:textSize="14dp"
-        android:text="Equipos del torneo" />
+        android:text="Añada los participantes del torneo" />
 
-    <ListView
-        android:id="@+id/listViewEquiposBaloncesto"
-        android:layout_width="wrap_content"
-        android:layout_height="500dp"
-        android:layout_below="@id/txtTituloEquiposBaloncesto"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="30dp"/>
-
-    <Button
-        android:id="@+id/btnCrearTorneoBaloncesto"
+    <TextView
+        android:id="@+id/txtNumeroParticipantesTorneo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/listViewEquiposBaloncesto"
+        android:layout_toRightOf="@id/txtInsertarParticipantes"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:textSize="14dp"
+        android:text="12" />
+
+    <ListView
+        android:id="@+id/listViewParticipantes"
+        android:layout_width="wrap_content"
+        android:layout_height="450dp"
+        android:layout_below="@id/txtInsertarParticipantes"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        android:divider="@null"
+        android:dividerHeight="10dp" />
+
+    <Button
+        android:id="@+id/btnCrearTorneo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listViewParticipantes"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:layout_marginLeft="15dp"

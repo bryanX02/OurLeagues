@@ -1,6 +1,7 @@
 package com.example.ourleagues.controlador
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -26,7 +27,8 @@ class TorneoController : AppCompatActivity(), View.OnClickListener {
     // Variable torneo que empleare en varios métodos y funciones
     private var torneo = Torneo()
 
-    // Variables de las clases de los fragment que se veran del torneo
+    // Variables que recogeran datos
+    var idTorneo = "No llego la IdTorneo"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,20 +44,20 @@ class TorneoController : AppCompatActivity(), View.OnClickListener {
 
         // Obtengo el torneo con el id del torneo que se pulso en la lista que nos llevo a este activity
         var extras = intent.extras
-        var idTorneo = extras?.getString("IdTorneo")
         lifecycleScope.launch {
-            if (idTorneo != null) {
-                torneo.obtener(idTorneo)
 
-                txtTituloNombreTorneo.text = torneo.nombre
-                txtDescripcionTorneo.text = torneo.descripcion
-                txtUbicacionTorneo.text = torneo.ubicacion
-                Picasso.get().load(torneo.urlFoto).into(imgTorneo)
+            torneo.obtener("9UgydjWzbFcsbUdtkBvXQVJcda22")
 
-                cargarFragmentsPaginador()
+            Log.d(":::LOG", torneo.urlFoto.toString())
+            txtTituloNombreTorneo.text = torneo.nombre
+            txtDescripcionTorneo.text = torneo.descripcion
+            txtUbicacionTorneo.text = torneo.ubicacion
+            Picasso.get().load(torneo.urlFoto).into(imgTorneo)
 
-            }
+            cargarFragmentsPaginador()
+
         }
+
 
 
     }
