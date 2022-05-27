@@ -24,7 +24,14 @@ class Participacion : DAO<Participacion> {
 
     override suspend fun obtener(identificador: String) {
 
+        auxFirebase.db.collection("participantes").document(identificador).get().addOnSuccessListener {
 
+            idParticipacion = it.id
+            idTorneo = it.get("IdTorneo").toString()
+            idPaticipante = it.get("IdParticipante").toString()
+            nombreParticipante = it.get("NombreParticipante").toString()
+
+        }.await()
 
     }
 

@@ -49,8 +49,6 @@ class AdaptadorParticipante (private val context: Context,
             // Inserto los datos a cada fila
             txtNombreParticipante.setText(listaParticipantes[p0].nombreParticipante)
 
-            Log.d(":::LOG", "entro")
-
             /* IMPORTANTE
 
                 Aqui guardo cada rowView en su correspondiente Participacion de la la listaPartipantes.

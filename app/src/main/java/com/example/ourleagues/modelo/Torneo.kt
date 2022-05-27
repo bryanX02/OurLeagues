@@ -24,8 +24,10 @@ class Torneo : DAO<Torneo> {
     var fechaInicio: Calendar = Calendar.getInstance()
     var fechaFin: Calendar = Calendar.getInstance()
 
-    // Variables
+    // Variables y constantes
+    var listaParticipantes = arrayListOf<Participacion>()
     val auxFirebase = AuxFirebase()
+
 
     override suspend fun obtener(identificador: String) {
 
@@ -68,6 +70,7 @@ class Torneo : DAO<Torneo> {
 
             creado = true
             crearParticipaciones()
+            crearPartidos()
 
         }
 
@@ -155,6 +158,34 @@ class Torneo : DAO<Torneo> {
             participacion.idPaticipante = "Guest"
             participacion.nombreParticipante = "Partipante $i"
             participacion.crearParticipacion()
+            listaParticipantes.add(participacion)
+
+        }
+
+    }
+
+    suspend fun crearPartidos() {
+
+        var partido = Partido()
+        var salto = 0
+
+        // Desordeno la lista
+        listaParticipantes.shuffle()
+
+        var nombreParticipante1 = ""
+        var nombreParticipante2 = ""
+        // Ahora creo las participaciones, es decir, creo unos participantes por defecto
+        for (i in 0..listaParticipantes.size/2) {
+
+            partido.idPartido = UUID.randomUUID().toString()
+            partido.idTorneo = idTorneo.toString()
+            nombreParticipante1 = listaParticipantes[salto].nombreParticipante.toString()
+            nombreParticipante2 = listaParticipantes[salto+1].nombreParticipante.toString()
+            partido.nombrePartido = "Partido entre $nombreParticipante1 y $nombreParticipante2"
+            partido.participante1 = listaParticipantes[salto].idParticipacion.toString()
+            partido.participante1 = listaParticipantes[salto+1].idParticipacion.toString()
+            partido.crearPartido()
+            salto += 2
 
         }
 
